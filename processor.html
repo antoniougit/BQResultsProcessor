@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Variant Mapping Tool</title>
+    <title>BQ Results Processor</title>
   </head>
   <body>
-    <h1>Variant Mapping Tool</h1>
+    <h1>BQ Results Processor</h1>
     <input type="file" id="dataFile" accept=".csv, .xlsx, .xls" />
     <textarea
       id="xmlCode"
@@ -14,7 +14,6 @@
     ></textarea>
     <button id="mapButton">Map Variants</button>
 
-    <!-- use xlsx.mini.min.js from version 0.20.0 -->
     <script
       lang="javascript"
       src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.mini.min.js"
@@ -41,16 +40,12 @@
         const xmlCode = xmlCodeInput.value;
 
         try {
-          // Step 1: Read and parse the CSV or Excel file
           const data = await readDataFile(dataFile);
 
-          // Step 2: Parse the XML code and extract the mapping
           const variantMapping = parseXMLCode(xmlCode);
 
-          // Step 3: Map CLUSTER_ID to variants based on the mapping
           const mappedData = mapClusterToVariant(data, variantMapping);
 
-          // Step 4: Generate and download the final report
           downloadFinalReport(mappedData);
         } catch (error) {
           alert('Error processing the data: ' + error.message);
@@ -65,11 +60,9 @@
             const data = event.target.result;
             const workbook = XLSX.read(data, { type: 'binary' });
 
-            // Assuming there is only one sheet in the Excel file.
             const sheetName = workbook.SheetNames[0];
             const sheet = workbook.Sheets[sheetName];
 
-            // Convert the sheet data to JSON format.
             const jsonData = XLSX.utils.sheet_to_json(sheet);
 
             resolve(jsonData);
@@ -121,26 +114,41 @@
             currentVariantName = node.textContent.trim();
           }
         }
-        //console.log(variantMapping);
 
         return variantMapping;
       }
 
       function mapClusterToVariant(data, variantMapping) {
-        const mappedData = data.map((row) => {
-          const clusterId = row.CLUSTER_ID.toString(); // Convert to string for consistency
+        const aggregatedData = {};
 
-          // Check if the CLUSTER_ID exists in the variantMapping
+        data.forEach((row) => {
+          const clusterId = row.CLUSTER_ID.toString();
+
           if (clusterId in variantMapping) {
-            row.variants = variantMapping[clusterId];
-          } else {
-            row.variants = 'N/A'; // If CLUSTER_ID not found in variantMapping, set variants to N/A
-          }
+            const variantName = variantMapping[clusterId];
 
-          return row;
+            if (!aggregatedData[variantName]) {
+              aggregatedData[variantName] = {
+                VARIANT_NAME: variantName,
+                CAMPAIGN_ID: row.CAMPAIGN_ID,
+                DELIVERY_ID: row.DELIVERY_ID,
+                emailOpen: 0,
+                emailClick: 0,
+                emailSend: 0,
+              };
+            }
+
+            if (row.EVENT_NAME === 'emailOpen') {
+              aggregatedData[variantName].emailOpen++;
+            } else if (row.EVENT_NAME === 'emailClick') {
+              aggregatedData[variantName].emailClick++;
+            } else if (row.EVENT_NAME === 'emailSend') {
+              aggregatedData[variantName].emailSend++;
+            }
+          }
         });
 
-        return mappedData;
+        return Object.values(aggregatedData);
       }
 
       function downloadFinalReport(data) {
@@ -154,6 +162,8 @@
       }
 
       function convertToCSV(data) {
+        if (data.length === 0) return '';
+
         const header = Object.keys(data[0]).join(',');
         const rows = data.map((row) => Object.values(row).join(','));
         return [header, ...rows].join('\n');
