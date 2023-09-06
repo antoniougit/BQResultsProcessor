@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Variant Mapping Tool</title>
+  </head>
+  <body>
+    <h1>Variant Mapping Tool</h1>
+    <input type="file" id="dataFile" accept=".csv, .xlsx, .xls" />
+    <textarea
+      id="xmlCode"
+      rows="10"
+      cols="50"
+      placeholder="Paste XML code here..."
+    ></textarea>
+    <button id="mapButton">Map Variants</button>
+
+    <!-- use xlsx.mini.min.js from version 0.20.0 -->
+    <script
+      lang="javascript"
+      src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.mini.min.js"
+    ></script>
+
+    <script>
+      document
+        .getElementById('mapButton')
+        .addEventListener('click', mapVariants);
+
+      async function mapVariants() {
+        const dataFileInput = document.getElementById('dataFile');
+        const xmlCodeInput = document.getElementById('xmlCode');
+
+        xmlCodeInput.value =
+          '<RULESET>  <RULESET_NAME>NL_Spectacles_S28_108536_2023_07_10_081340</RULESET_NAME>  <CONTENT_AREAS>    <CONTENT_AREA name="PersadoSubjectLine" type="Subject">      <DEFAULT_CONTENT name="control.subject">        <![CDATA[:-) Actu estivale : Carrefour vous récompense avec ces offres sur les parcs AQUATIQUES]]>      </DEFAULT_CONTENT>    </CONTENT_AREA>    <CONTENT_AREA name="PersadoVariationCode" type="Body-Text">      <DEFAULT_CONTENT name="control.body">        <![CDATA[DEF_1]]>      </DEFAULT_CONTENT>    </CONTENT_AREA>  </CONTENT_AREAS>  <RULES>    <RULE>      <RULE_NAME>PersadoVariant_D_1</RULE_NAME>      <PRIORITY>1</PRIORITY>      <CRITERIA>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_1@]]>          </VALUES>          <AND_OR>          </AND_OR>        </EXPRESSION>        <EXPRESSION>          <TYPE>NE</TYPE>          <COLUMN_NAME>CLUSTER_ID</COLUMN_NAME>          <OPERATORS>            <![CDATA[BETWEEN]]>          </OPERATORS>          <VALUES>            <![CDATA[0|249]]>          </VALUES>          <AND_OR>OR</AND_OR>          <LEFT_PARENS>(</LEFT_PARENS>        </EXPRESSION>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[NOT LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_]]>          </VALUES>          <AND_OR>AND</AND_OR>          <RIGHT_PARENS>)</RIGHT_PARENS>        </EXPRESSION>      </CRITERIA>      <CONTENTS>        <CONTENT name="subjectName" content_area="PersadoSubjectLine">          <![CDATA[Rires et sensations fortes garantis ! Tous les parcs AQUATIQUES au meilleur prix, jetez un œil 😉]]>        </CONTENT>        <CONTENT name="bodyName" content_area="PersadoVariationCode">          <![CDATA[D_1]]>        </CONTENT>      </CONTENTS>    </RULE>    <RULE>      <RULE_NAME>PersadoVariant_C_1</RULE_NAME>      <PRIORITY>2</PRIORITY>      <CRITERIA>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_4@]]>          </VALUES>          <AND_OR>          </AND_OR>        </EXPRESSION>        <EXPRESSION>          <TYPE>NE</TYPE>          <COLUMN_NAME>CLUSTER_ID</COLUMN_NAME>          <OPERATORS>            <![CDATA[BETWEEN]]>          </OPERATORS>          <VALUES>            <![CDATA[250|499]]>          </VALUES>          <AND_OR>OR</AND_OR>          <LEFT_PARENS>(</LEFT_PARENS>        </EXPRESSION>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[NOT LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_]]>          </VALUES>          <AND_OR>AND</AND_OR>          <RIGHT_PARENS>)</RIGHT_PARENS>        </EXPRESSION>      </CRITERIA>      <CONTENTS>        <CONTENT name="subjectName" content_area="PersadoSubjectLine">          <![CDATA[💦 Tous les parcs AQUATIQUES au meilleur prix !]]>        </CONTENT>        <CONTENT name="bodyName" content_area="PersadoVariationCode">          <![CDATA[C_1]]>        </CONTENT>      </CONTENTS>    </RULE>    <RULE>      <RULE_NAME>PersadoVariant_DEF_1</RULE_NAME>      <PRIORITY>3</PRIORITY>      <CRITERIA>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_3@]]>          </VALUES>          <AND_OR>          </AND_OR>        </EXPRESSION>        <EXPRESSION>          <TYPE>NE</TYPE>          <COLUMN_NAME>CLUSTER_ID</COLUMN_NAME>          <OPERATORS>            <![CDATA[BETWEEN]]>          </OPERATORS>          <VALUES>            <![CDATA[500|749]]>          </VALUES>          <AND_OR>OR</AND_OR>          <LEFT_PARENS>(</LEFT_PARENS>        </EXPRESSION>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[NOT LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_]]>          </VALUES>          <AND_OR>AND</AND_OR>          <RIGHT_PARENS>)</RIGHT_PARENS>        </EXPRESSION>      </CRITERIA>      <CONTENTS>        <CONTENT name="subjectName" content_area="PersadoSubjectLine">          <![CDATA[:-) Actu estivale : Carrefour vous récompense avec ces offres sur les parcs AQUATIQUES]]>        </CONTENT>        <CONTENT name="bodyName" content_area="PersadoVariationCode">          <![CDATA[DEF_1]]>        </CONTENT>      </CONTENTS>    </RULE>    <RULE>      <RULE_NAME>PersadoVariant_D_2</RULE_NAME>      <PRIORITY>4</PRIORITY>      <CRITERIA>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_2@]]>          </VALUES>          <AND_OR>          </AND_OR>        </EXPRESSION>        <EXPRESSION>          <TYPE>NE</TYPE>          <COLUMN_NAME>CLUSTER_ID</COLUMN_NAME>          <OPERATORS>            <![CDATA[BETWEEN]]>          </OPERATORS>          <VALUES>            <![CDATA[750|1000]]>          </VALUES>          <AND_OR>OR</AND_OR>          <LEFT_PARENS>(</LEFT_PARENS>        </EXPRESSION>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[NOT LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_]]>          </VALUES>          <AND_OR>AND</AND_OR>          <RIGHT_PARENS>)</RIGHT_PARENS>        </EXPRESSION>      </CRITERIA>      <CONTENTS>        <CONTENT name="subjectName" content_area="PersadoSubjectLine">          <![CDATA[💦 Voici votre invitation à plonger au cœur d\'un tourbillon de sensations fortes !]]>        </CONTENT>        <CONTENT name="bodyName" content_area="PersadoVariationCode">          <![CDATA[D_2]]>        </CONTENT>      </CONTENTS>    </RULE>  </RULES></RULESET>';
+
+        if (!dataFileInput.files[0] || !xmlCodeInput.value) {
+          alert('Please select a data file and paste the XML code.');
+          return;
+        }
+
+        const dataFile = dataFileInput.files[0];
+        const xmlCode = xmlCodeInput.value;
+
+        try {
+          // Step 1: Read and parse the CSV or Excel file
+          const data = await readDataFile(dataFile);
+
+          // Step 2: Parse the XML code and extract the mapping
+          const variantMapping = parseXMLCode(xmlCode);
+
+          // Step 3: Map CLUSTER_ID to variants based on the mapping
+          const mappedData = mapClusterToVariant(data, variantMapping);
+
+          // Step 4: Generate and download the final report
+          downloadFinalReport(mappedData);
+        } catch (error) {
+          alert('Error processing the data: ' + error.message);
+        }
+      }
+
+      function readDataFile(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+
+          reader.onload = (event) => {
+            const data = event.target.result;
+            const workbook = XLSX.read(data, { type: 'binary' });
+
+            // Assuming there is only one sheet in the Excel file.
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+
+            // Convert the sheet data to JSON format.
+            const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+            resolve(jsonData);
+          };
+
+          reader.onerror = (error) => {
+            reject(error);
+          };
+
+          reader.readAsBinaryString(file);
+        });
+      }
+
+      function parseXMLCode(xmlCode) {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlCode, 'text/xml');
+
+        const xpathExpression = `//RULE//VALUES[contains(.,'|')] | //RULE/RULE_NAME`;
+
+        const result = xmlDoc.evaluate(
+          xpathExpression,
+          xmlDoc,
+          null,
+          XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+          null
+        );
+
+        const variantMapping = {};
+
+        let currentVariantName = '';
+        for (let i = 0; i < result.snapshotLength; i++) {
+          const node = result.snapshotItem(i);
+
+          if (node.nodeName === 'VALUES') {
+            const value = node.textContent.trim();
+            const valueParts = value.split('|');
+
+            if (valueParts.length === 2) {
+              const start = parseFloat(valueParts[0]);
+              const end = parseFloat(valueParts[1]);
+
+              for (let j = start; j <= end; j++) {
+                if (!isNaN(j)) {
+                  variantMapping[j.toString()] = currentVariantName;
+                }
+              }
+            }
+          } else if (node.nodeName === 'RULE_NAME') {
+            currentVariantName = node.textContent.trim();
+          }
+        }
+        //console.log(variantMapping);
+
+        return variantMapping;
+      }
+
+      function mapClusterToVariant(data, variantMapping) {
+        const mappedData = data.map((row) => {
+          const clusterId = row.CLUSTER_ID.toString(); // Convert to string for consistency
+
+          // Check if the CLUSTER_ID exists in the variantMapping
+          if (clusterId in variantMapping) {
+            row.variants = variantMapping[clusterId];
+          } else {
+            row.variants = 'N/A'; // If CLUSTER_ID not found in variantMapping, set variants to N/A
+          }
+
+          return row;
+        });
+
+        return mappedData;
+      }
+
+      function downloadFinalReport(data) {
+        const csvData = convertToCSV(data);
+        const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'final_report.csv';
+        downloadLink.click();
+      }
+
+      function convertToCSV(data) {
+        const header = Object.keys(data[0]).join(',');
+        const rows = data.map((row) => Object.values(row).join(','));
+        return [header, ...rows].join('\n');
+      }
+    </script>
+  </body>
+</html>
