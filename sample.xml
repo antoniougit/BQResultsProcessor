@@ -1,0 +1,217 @@
+<RULESET>
+  <RULESET_NAME>NL_Spectacles_S28_108536_2023_07_10_081340</RULESET_NAME>
+  <CONTENT_AREAS>
+    <CONTENT_AREA name="PersadoSubjectLine" type="Subject">
+      <DEFAULT_CONTENT name="control.subject">
+        <![CDATA[:-) Actu estivale : Carrefour vous récompense avec ces offres sur les parcs AQUATIQUES]]>
+      </DEFAULT_CONTENT>
+    </CONTENT_AREA>
+    <CONTENT_AREA name="PersadoVariationCode" type="Body-Text">
+      <DEFAULT_CONTENT name="control.body">
+        <![CDATA[DEF_1]]>
+      </DEFAULT_CONTENT>
+    </CONTENT_AREA>
+  </CONTENT_AREAS>
+  <RULES>
+    <RULE>
+      <RULE_NAME>PersadoVariant_D_1</RULE_NAME>
+      <PRIORITY>1</PRIORITY>
+      <CRITERIA>
+        <EXPRESSION>
+          <TYPE>TE</TYPE>
+          <COLUMN_NAME>Email</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[LIKE]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[persado_version_1@]]>
+          </VALUES>
+          <AND_OR>
+          </AND_OR>
+        </EXPRESSION>
+        <EXPRESSION>
+          <TYPE>NE</TYPE>
+          <COLUMN_NAME>Cluster_ID</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[BETWEEN]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[0|249]]>
+          </VALUES>
+          <AND_OR>OR</AND_OR>
+          <LEFT_PARENS>(</LEFT_PARENS>
+        </EXPRESSION>
+        <EXPRESSION>
+          <TYPE>TE</TYPE>
+          <COLUMN_NAME>Email</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[NOT LIKE]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[persado_version_]]>
+          </VALUES>
+          <AND_OR>AND</AND_OR>
+          <RIGHT_PARENS>)</RIGHT_PARENS>
+        </EXPRESSION>
+      </CRITERIA>
+      <CONTENTS>
+        <CONTENT name="subjectName" content_area="PersadoSubjectLine">
+          <![CDATA[Rires et sensations fortes garantis ! Tous les parcs AQUATIQUES au meilleur prix, jetez un œil 😉]]>
+        </CONTENT>
+        <CONTENT name="bodyName" content_area="PersadoVariationCode">
+          <![CDATA[D_1]]>
+        </CONTENT>
+      </CONTENTS>
+    </RULE>
+    <RULE>
+      <RULE_NAME>PersadoVariant_C_1</RULE_NAME>
+      <PRIORITY>2</PRIORITY>
+      <CRITERIA>
+        <EXPRESSION>
+          <TYPE>TE</TYPE>
+          <COLUMN_NAME>Email</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[LIKE]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[persado_version_4@]]>
+          </VALUES>
+          <AND_OR>
+          </AND_OR>
+        </EXPRESSION>
+        <EXPRESSION>
+          <TYPE>NE</TYPE>
+          <COLUMN_NAME>Cluster_ID</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[BETWEEN]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[250|499]]>
+          </VALUES>
+          <AND_OR>OR</AND_OR>
+          <LEFT_PARENS>(</LEFT_PARENS>
+        </EXPRESSION>
+        <EXPRESSION>
+          <TYPE>TE</TYPE>
+          <COLUMN_NAME>Email</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[NOT LIKE]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[persado_version_]]>
+          </VALUES>
+          <AND_OR>AND</AND_OR>
+          <RIGHT_PARENS>)</RIGHT_PARENS>
+        </EXPRESSION>
+      </CRITERIA>
+      <CONTENTS>
+        <CONTENT name="subjectName" content_area="PersadoSubjectLine">
+          <![CDATA[💦 Tous les parcs AQUATIQUES au meilleur prix !]]>
+        </CONTENT>
+        <CONTENT name="bodyName" content_area="PersadoVariationCode">
+          <![CDATA[C_1]]>
+        </CONTENT>
+      </CONTENTS>
+    </RULE>
+    <RULE>
+      <RULE_NAME>PersadoVariant_DEF_1</RULE_NAME>
+      <PRIORITY>3</PRIORITY>
+      <CRITERIA>
+        <EXPRESSION>
+          <TYPE>TE</TYPE>
+          <COLUMN_NAME>Email</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[LIKE]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[persado_version_3@]]>
+          </VALUES>
+          <AND_OR>
+          </AND_OR>
+        </EXPRESSION>
+        <EXPRESSION>
+          <TYPE>NE</TYPE>
+          <COLUMN_NAME>Cluster_ID</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[BETWEEN]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[500|749]]>
+          </VALUES>
+          <AND_OR>OR</AND_OR>
+          <LEFT_PARENS>(</LEFT_PARENS>
+        </EXPRESSION>
+        <EXPRESSION>
+          <TYPE>TE</TYPE>
+          <COLUMN_NAME>Email</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[NOT LIKE]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[persado_version_]]>
+          </VALUES>
+          <AND_OR>AND</AND_OR>
+          <RIGHT_PARENS>)</RIGHT_PARENS>
+        </EXPRESSION>
+      </CRITERIA>
+      <CONTENTS>
+        <CONTENT name="subjectName" content_area="PersadoSubjectLine">
+          <![CDATA[:-) Actu estivale : Carrefour vous récompense avec ces offres sur les parcs AQUATIQUES]]>
+        </CONTENT>
+        <CONTENT name="bodyName" content_area="PersadoVariationCode">
+          <![CDATA[DEF_1]]>
+        </CONTENT>
+      </CONTENTS>
+    </RULE>
+    <RULE>
+      <RULE_NAME>PersadoVariant_D_2</RULE_NAME>
+      <PRIORITY>4</PRIORITY>
+      <CRITERIA>
+        <EXPRESSION>
+          <TYPE>TE</TYPE>
+          <COLUMN_NAME>Email</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[LIKE]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[persado_version_2@]]>
+          </VALUES>
+          <AND_OR>
+          </AND_OR>
+        </EXPRESSION>
+        <EXPRESSION>
+          <TYPE>NE</TYPE>
+          <COLUMN_NAME>Cluster_ID</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[BETWEEN]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[750|1000]]>
+          </VALUES>
+          <AND_OR>OR</AND_OR>
+          <LEFT_PARENS>(</LEFT_PARENS>
+        </EXPRESSION>
+        <EXPRESSION>
+          <TYPE>TE</TYPE>
+          <COLUMN_NAME>Email</COLUMN_NAME>
+          <OPERATORS>
+            <![CDATA[NOT LIKE]]>
+          </OPERATORS>
+          <VALUES>
+            <![CDATA[persado_version_]]>
+          </VALUES>
+          <AND_OR>AND</AND_OR>
+          <RIGHT_PARENS>)</RIGHT_PARENS>
+        </EXPRESSION>
+      </CRITERIA>
+      <CONTENTS>
+        <CONTENT name="subjectName" content_area="PersadoSubjectLine">
+          <![CDATA[💦 Voici votre invitation à plonger au cœur d'un tourbillon de sensations fortes !]]>
+        </CONTENT>
+        <CONTENT name="bodyName" content_area="PersadoVariationCode">
+          <![CDATA[D_2]]>
+        </CONTENT>
+      </CONTENTS>
+    </RULE>
+  </RULES>
+</RULESET>
