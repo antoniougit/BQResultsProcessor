@@ -109,7 +109,12 @@
 
           const mappedData = mapClusterToVariant(data, variantMapping);
 
-          downloadFinalReport(mappedData);
+          const dataFileName = dataFile.name;
+          const [fileName, fileExtension] = dataFileName.split('.');
+
+          const finalFileName = `${fileName}-processed.${fileExtension}`;
+
+          downloadFinalReport(mappedData, finalFileName);
         } catch (error) {
           alert('Error processing the data: ' + error.message);
         }
@@ -182,31 +187,43 @@
       }
 
       function mapClusterToVariant(data, variantMapping) {
+        const uniqueEvents = {}; // To track unique events per user
         const aggregatedData = {};
 
         data.forEach((row) => {
           const clusterId = row.CLUSTER_ID.toString();
 
           if (clusterId in variantMapping) {
-            const variantName = variantMapping[clusterId];
+            const variantCode = variantMapping[clusterId];
+            const userKey = `${row.CAMPAIGN_ID}-${row.DELIVERY_ID}-${row.ENCODED_RECIPIENT_ID}-${variantCode}-${row.EVENT_NAME}`;
 
-            if (!aggregatedData[variantName]) {
-              aggregatedData[variantName] = {
-                VARIANT_NAME: variantName,
-                CAMPAIGN_ID: row.CAMPAIGN_ID,
-                DELIVERY_ID: row.DELIVERY_ID,
-                OPENS: 0,
-                CLICKS: 0,
-                SENDS: 0,
-              };
-            }
+            if (!uniqueEvents[userKey]) {
+              if (!aggregatedData[variantCode]) {
+                aggregatedData[variantCode] = {
+                  VARIANT_CODE: variantCode,
+                  CAMPAIGN_ID: row.CAMPAIGN_ID,
+                  DELIVERY_ID: row.DELIVERY_ID,
+                  OPENS: 0,
+                  CLICKS: 0,
+                  SENDS: 0,
+                };
+              }
 
-            if (row.EVENT_NAME === 'emailOpen') {
-              aggregatedData[variantName].OPENS++;
-            } else if (row.EVENT_NAME === 'emailClick') {
-              aggregatedData[variantName].CLICKS++;
-            } else if (row.EVENT_NAME === 'emailSend') {
-              aggregatedData[variantName].SENDS++;
+              switch (row.EVENT_NAME) {
+                case 'emailOpen':
+                  aggregatedData[variantCode].OPENS++;
+                  break;
+                case 'emailClick':
+                  aggregatedData[variantCode].CLICKS++;
+                  break;
+                case 'emailSend':
+                  aggregatedData[variantCode].SENDS++;
+                  break;
+                default:
+                  break;
+              }
+
+              uniqueEvents[userKey] = true;
             }
           }
         });
@@ -214,13 +231,13 @@
         return Object.values(aggregatedData);
       }
 
-      function downloadFinalReport(data) {
+      function downloadFinalReport(data, fileName) {
         const csvData = convertToCSV(data);
         const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
 
         const downloadLink = document.createElement('a');
         downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = 'final_report.csv';
+        downloadLink.download = fileName;
         downloadLink.click();
       }
 
