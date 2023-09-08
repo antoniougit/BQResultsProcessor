@@ -2,17 +2,83 @@
 <html>
   <head>
     <title>BQ Results Processor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        background-color: #000000;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .btn-primary {
+        background-color: #ff0000;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+    </style>
   </head>
   <body>
-    <h1>BQ Results Processor</h1>
-    <input type="file" id="dataFile" accept=".csv, .xlsx, .xls" />
-    <textarea
-      id="xmlCode"
-      rows="10"
-      cols="50"
-      placeholder="Paste XML code here..."
-    ></textarea>
-    <button id="mapButton">Map Variants</button>
+    <div class="container">
+      <div class="header">
+        <h2>BQ Results Processor</h2>
+      </div>
+      <div class="form-group">
+        <label for="dataFile">Upload BQ Report:</label>
+        <input
+          type="file"
+          id="dataFile"
+          accept=".csv, .xlsx, .xls"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="xmlCode">Paste XML Code from Portal Setup:</label>
+        <textarea
+          id="xmlCode"
+          rows="10"
+          placeholder="Paste XML code here..."
+          class="form-control"
+        ></textarea>
+      </div>
+      <button type="button" id="processButton" class="btn-primary">
+        Process & Download
+      </button>
+    </div>
 
     <script
       lang="javascript"
@@ -21,15 +87,12 @@
 
     <script>
       document
-        .getElementById('mapButton')
+        .getElementById('processButton')
         .addEventListener('click', mapVariants);
 
       async function mapVariants() {
         const dataFileInput = document.getElementById('dataFile');
         const xmlCodeInput = document.getElementById('xmlCode');
-
-        xmlCodeInput.value =
-          '<RULESET>  <RULESET_NAME>NL_Spectacles_S28_108536_2023_07_10_081340</RULESET_NAME>  <CONTENT_AREAS>    <CONTENT_AREA name="PersadoSubjectLine" type="Subject">      <DEFAULT_CONTENT name="control.subject">        <![CDATA[:-) Actu estivale : Carrefour vous récompense avec ces offres sur les parcs AQUATIQUES]]>      </DEFAULT_CONTENT>    </CONTENT_AREA>    <CONTENT_AREA name="PersadoVariationCode" type="Body-Text">      <DEFAULT_CONTENT name="control.body">        <![CDATA[DEF_1]]>      </DEFAULT_CONTENT>    </CONTENT_AREA>  </CONTENT_AREAS>  <RULES>    <RULE>      <RULE_NAME>PersadoVariant_D_1</RULE_NAME>      <PRIORITY>1</PRIORITY>      <CRITERIA>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_1@]]>          </VALUES>          <AND_OR>          </AND_OR>        </EXPRESSION>        <EXPRESSION>          <TYPE>NE</TYPE>          <COLUMN_NAME>CLUSTER_ID</COLUMN_NAME>          <OPERATORS>            <![CDATA[BETWEEN]]>          </OPERATORS>          <VALUES>            <![CDATA[0|249]]>          </VALUES>          <AND_OR>OR</AND_OR>          <LEFT_PARENS>(</LEFT_PARENS>        </EXPRESSION>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[NOT LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_]]>          </VALUES>          <AND_OR>AND</AND_OR>          <RIGHT_PARENS>)</RIGHT_PARENS>        </EXPRESSION>      </CRITERIA>      <CONTENTS>        <CONTENT name="subjectName" content_area="PersadoSubjectLine">          <![CDATA[Rires et sensations fortes garantis ! Tous les parcs AQUATIQUES au meilleur prix, jetez un œil 😉]]>        </CONTENT>        <CONTENT name="bodyName" content_area="PersadoVariationCode">          <![CDATA[D_1]]>        </CONTENT>      </CONTENTS>    </RULE>    <RULE>      <RULE_NAME>PersadoVariant_C_1</RULE_NAME>      <PRIORITY>2</PRIORITY>      <CRITERIA>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_4@]]>          </VALUES>          <AND_OR>          </AND_OR>        </EXPRESSION>        <EXPRESSION>          <TYPE>NE</TYPE>          <COLUMN_NAME>CLUSTER_ID</COLUMN_NAME>          <OPERATORS>            <![CDATA[BETWEEN]]>          </OPERATORS>          <VALUES>            <![CDATA[250|499]]>          </VALUES>          <AND_OR>OR</AND_OR>          <LEFT_PARENS>(</LEFT_PARENS>        </EXPRESSION>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[NOT LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_]]>          </VALUES>          <AND_OR>AND</AND_OR>          <RIGHT_PARENS>)</RIGHT_PARENS>        </EXPRESSION>      </CRITERIA>      <CONTENTS>        <CONTENT name="subjectName" content_area="PersadoSubjectLine">          <![CDATA[💦 Tous les parcs AQUATIQUES au meilleur prix !]]>        </CONTENT>        <CONTENT name="bodyName" content_area="PersadoVariationCode">          <![CDATA[C_1]]>        </CONTENT>      </CONTENTS>    </RULE>    <RULE>      <RULE_NAME>PersadoVariant_DEF_1</RULE_NAME>      <PRIORITY>3</PRIORITY>      <CRITERIA>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_3@]]>          </VALUES>          <AND_OR>          </AND_OR>        </EXPRESSION>        <EXPRESSION>          <TYPE>NE</TYPE>          <COLUMN_NAME>CLUSTER_ID</COLUMN_NAME>          <OPERATORS>            <![CDATA[BETWEEN]]>          </OPERATORS>          <VALUES>            <![CDATA[500|749]]>          </VALUES>          <AND_OR>OR</AND_OR>          <LEFT_PARENS>(</LEFT_PARENS>        </EXPRESSION>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[NOT LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_]]>          </VALUES>          <AND_OR>AND</AND_OR>          <RIGHT_PARENS>)</RIGHT_PARENS>        </EXPRESSION>      </CRITERIA>      <CONTENTS>        <CONTENT name="subjectName" content_area="PersadoSubjectLine">          <![CDATA[:-) Actu estivale : Carrefour vous récompense avec ces offres sur les parcs AQUATIQUES]]>        </CONTENT>        <CONTENT name="bodyName" content_area="PersadoVariationCode">          <![CDATA[DEF_1]]>        </CONTENT>      </CONTENTS>    </RULE>    <RULE>      <RULE_NAME>PersadoVariant_D_2</RULE_NAME>      <PRIORITY>4</PRIORITY>      <CRITERIA>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_2@]]>          </VALUES>          <AND_OR>          </AND_OR>        </EXPRESSION>        <EXPRESSION>          <TYPE>NE</TYPE>          <COLUMN_NAME>CLUSTER_ID</COLUMN_NAME>          <OPERATORS>            <![CDATA[BETWEEN]]>          </OPERATORS>          <VALUES>            <![CDATA[750|1000]]>          </VALUES>          <AND_OR>OR</AND_OR>          <LEFT_PARENS>(</LEFT_PARENS>        </EXPRESSION>        <EXPRESSION>          <TYPE>TE</TYPE>          <COLUMN_NAME>Email</COLUMN_NAME>          <OPERATORS>            <![CDATA[NOT LIKE]]>          </OPERATORS>          <VALUES>            <![CDATA[persado_version_]]>          </VALUES>          <AND_OR>AND</AND_OR>          <RIGHT_PARENS>)</RIGHT_PARENS>        </EXPRESSION>      </CRITERIA>      <CONTENTS>        <CONTENT name="subjectName" content_area="PersadoSubjectLine">          <![CDATA[💦 Voici votre invitation à plonger au cœur d\'un tourbillon de sensations fortes !]]>        </CONTENT>        <CONTENT name="bodyName" content_area="PersadoVariationCode">          <![CDATA[D_2]]>        </CONTENT>      </CONTENTS>    </RULE>  </RULES></RULESET>';
 
         if (!dataFileInput.files[0] || !xmlCodeInput.value) {
           alert('Please select a data file and paste the XML code.');
@@ -132,18 +195,18 @@
                 VARIANT_NAME: variantName,
                 CAMPAIGN_ID: row.CAMPAIGN_ID,
                 DELIVERY_ID: row.DELIVERY_ID,
-                emailOpen: 0,
-                emailClick: 0,
-                emailSend: 0,
+                OPENS: 0,
+                CLICKS: 0,
+                SENDS: 0,
               };
             }
 
             if (row.EVENT_NAME === 'emailOpen') {
-              aggregatedData[variantName].emailOpen++;
+              aggregatedData[variantName].OPENS++;
             } else if (row.EVENT_NAME === 'emailClick') {
-              aggregatedData[variantName].emailClick++;
+              aggregatedData[variantName].CLICKS++;
             } else if (row.EVENT_NAME === 'emailSend') {
-              aggregatedData[variantName].emailSend++;
+              aggregatedData[variantName].SENDS++;
             }
           }
         });
