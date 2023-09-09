@@ -10,6 +10,6 @@ v0.2: outputs the aggregated results as required.
 
 v0.3: more modern, good-looking UI.  
 
-v0.4: count only unique events per user: only 1 event will count for each encoded_recipient_id per campaign_id, delivery_id, var_code, event_type. Filename now is the original filename + _processed.  
+v0.4: count only unique events per user: only 1 event will count for each encoded_recipient_id per campaign_id, delivery_id, var_code, event_type. Filename is now the original filename + _processed.  
 
 v0.5: order variants alphabetically in final report but keep DEF variants before D variants.  
